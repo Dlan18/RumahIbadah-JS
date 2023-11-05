@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masjid - JS</title>
+    <style>
+      * {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="world" width="1400" height="700" style="border: 1px solid black"></canvas>
+
+    <script>
+      // Inisialisasi Canvas
+      let canvas = document.getElementById('world');
+      let context = canvas.getContext('2d');
+
+      let Awan = new Image();
+      Awan.src = 'Awan.png';
+
+      let SKanan = new Image();
+      SKanan.src = 'SpeakerKanan.png';
+
+      let SKiri = new Image();
+      SKiri.src = 'SpeakerKiri.png';
+
+      let Bintang = new Image();
+      Bintang.src = 'BulanBintang.png';
+
+      // Menampilkan gambar dan mengatur posisinya
+
+      window.setInterval(function () {
+        context.drawImage(Awan, 150, 70, 130, 130);
+        context.drawImage(Awan, 1250 - 130, 70, 130, 130);
+        context.drawImage(SKiri, canvas.width / 2 - 142, canvas.height / 2 - 87, 45, 45);
+        context.drawImage(SKanan, canvas.width / 2 + 97, canvas.height / 2 - 87, 45, 45);
+        context.drawImage(Bintang, canvas.width / 2 - 18, canvas.height / 2 - 210, 35, 35);
+      });
+
+      // Membuat langit Biru
+
+      canvas.style.backgroundColor = 'rgb(87, 200, 245)';
+
+      // Membuat Jalan Hijau
+
+      context.fillStyle = 'rgb(57, 255, 67)';
+      context.fillRect(0, canvas.height / 2 + 150, canvas.width, canvas.height);
+
+      function membuatKubah(x, y, r, color) {
+        //   Membuat Kubah
+        context.fillStyle = color;
+        context.beginPath();
+        context.arc(x, y, r, Math.PI, 2 * Math.PI);
+
+        //   Menutup Kubah
+        context.moveTo(x - r, y);
+        context.lineTo(x + r, y);
+
+        //   Mewarnai dan menggaris kubah
+        context.lineWidth = r / 10;
+        context.fill();
+      }
+
+      membuatKubah(canvas.width / 2, canvas.height / 2 - 50, 100, 'green');
+
+      function membuatPersegi(x, y, width, height, color) {
+        context.fillStyle = color;
+        context.beginPath();
+        context.rect(x, y, width, height);
+        context.lineWidth = width / 10;
+        // context.stroke();
+        context.fill();
+      }
+
+      membuatPersegi(canvas.width / 2 - 3, canvas.height / 2 - 180, 6, 30, '#DFB23F');
+      membuatPersegi(canvas.width / 2 - 6, canvas.height / 2 - 160, 12, 10, '#DFB23F');
+      membuatPersegi(canvas.width / 2 - 250, canvas.height / 2 - 50, 500, 250, '#FFC868');
+      membuatPersegi(canvas.width / 2 - 100 - 100 - 70, canvas.height / 2 - 50, 540, 15, 'orange');
+      membuatPersegi(canvas.width / 2 - 100 - 100 - 50, canvas.height / 2 - 35, 25, 250, 'brown');
+      membuatPersegi(canvas.width / 2 - 100 - 100 - 50, canvas.height / 2 + 180, 500, 20, 'brown');
+      membuatPersegi(canvas.width / 2 - 100 - 55, canvas.height / 2 - 35, 310, 250, 'brown');
+      membuatPersegi(canvas.width / 2 + 100 + 100 + 25, canvas.height / 2 - 35, 25, 250, 'brown');
+
+      function membuatPintu(x, y, width, height, color) {
+        membuatKubah(x, y, width / 2, color);
+        membuatPersegi(x - width / 2, y, width, height, color);
+      }
+
+      // Membuat Pintu
+
+      membuatPintu(canvas.width / 2 - 70, canvas.height / 2 + 80, 110, 120, 'white');
+      membuatPintu(canvas.width / 2 + 70, canvas.height / 2 + 80, 110, 120, 'white');
+      membuatPersegi(canvas.width / 2 + 15, canvas.height / 2 + 100, 110, 100, '#FFC868');
+      membuatPintu(canvas.width / 2 - 190, canvas.height / 2 + 90, 70, 90, 'white');
+      membuatPintu(canvas.width / 2 + 190, canvas.height / 2 + 90, 70, 90, 'white');
+
+      // Membuat Teks/Tulisan
+
+      context.fillStyle = 'black';
+      context.font = '15px sans-serif';
+      context.fillText('Masjid', canvas.width / 2 + 47, canvas.height / 2 + 145, 200);
+      context.fillText('Jami Aridho', canvas.width / 2 + 28, canvas.height / 2 + 165, 200);
+
+      //  Membuat Tangga
+
+      membuatPersegi(canvas.width / 2 - 100 - 100 - 70, canvas.height / 2 + 200, 540, 15, '#A05B00');
+      membuatPersegi(canvas.width / 2 - 100 - 100 - 85, canvas.height / 2 + 200 + 15, 570, 15, '#A05B00');
+    </script>
+  </body>
+</html>
